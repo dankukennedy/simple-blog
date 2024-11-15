@@ -11,7 +11,8 @@
        @csrf 
        @method('PUT')
        <input type="text" name="title" value="{{$post->title}}">
-       <textarea name="body" ></textarea>
+       <textarea name="body" >{{$post->body}}</textarea>
+       <button>Save Changes</button>
     </form>
 </body>
 </html>
