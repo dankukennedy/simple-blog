@@ -3,19 +3,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
     <title>Document</title>
 </head>
 <body>
 
     @auth 
-    <p>Congrats you are logged in</p>
+    <p class="text-green-500">Congrats you are logged in</p>
     <form action="/logout" method="POST">
     @csrf
     <button>Log Out</button>
     </form>
 
-    <div style="border: 3px solid blue; padding:2px;  ">
-        <h2>Create a New Post</h2>
+    <div  class="border-gray-400">
+        <h2 class="text-green-500">Create a New Post</h2>
         <form action="/create-post" method="POST">
             @csrf
             <input type="text" name="title" placeholder="Title">
@@ -24,12 +26,14 @@
         </form>
     </div>
 
-    <div style="border: 3px solid blue; padding:2px;  ">
-         <h2>All Posts</h2>
+    <div class="border-gray-400" >
+         <h2 class="text-green-500">All Posts</h2>
          @foreach ($posts as $post)
-         <div style="background-color:gray; padding:10px; margin:10px">
-              <h3>{{$post['title']}}</h3>
+         <div  class=" border-gray-200 bg-white text-sm text-green-700 shadow-sm">
+              <h3>{{$post['title']}} by {{$post->user->name}}</h3>
               {{$post['body']}}
+              <p>Created on {{$post['created_at']}}</p>
+              <p>Updated on {{$post['updated_at']}}</p>
               <p><a href="/edit-post/{{$post->id}}">Edit</a></p>
               <form action="/delete-post/{{$post->id}}" method="POST">
                 @csrf
@@ -42,8 +46,8 @@
 
     @else
     
-    <div style="border: 3px solid blue; padding:2px;  ">
-        <h2>Register</h2>
+    <div  class="border-gray-400">
+        <h2 class="text-green-500">Register</h2>
         <form action="/register" method="POST">
            @csrf
            <input type="text" name="name" placeholder="name">
@@ -53,11 +57,11 @@
         </form>
     </div>
 
-    <div style="border: 3px solid blue; padding:2px; margin-top:20px  ">
-        <h2>Login</h2>
+    <div  class="border-gray-400">
+        <h2 class="text-green-500">Login</h2>
         <form action="/login" method="POST">
            @csrf
-           <input type="text" name="loginname" placeholder="name">
+           <input type="text" name="loginname" placeholder="name" >
            <input type="password" name="loginpassword" placeholder="password">
            <button>Login</button>
         </form>
